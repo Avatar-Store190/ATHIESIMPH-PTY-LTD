@@ -1,26 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ATHIESIMPH PTY LTD | Design • Create • Maintain</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
 body{background:#f6faf6;color:#222}
 header{background:#0e501e;color:#fff;padding:28px 18px;text-align:center}
-header h1{font-size:36px;letter-spacing:1px}
-header p{color:#b7ffbd;margin-top:6px}
-.tagline{font-size:22px;margin-top:14px}
-.tagline b{color:#ffe98a}
+header img{width:110px;height:110px;object-fit:cover;border-radius:50%;border:4px solid #fff;background:#fff;display:none;margin:auto}
+header h1{font-size:36px} header p{color:#b7ffbd;margin-top:6px}
+.tagline{font-size:22px;margin-top:14px} .tagline b{color:#ffe98a}
 .topbar{background:#0a7a28;color:#fff;text-align:center;padding:10px;font-weight:bold}
-nav{background:#fff;padding:12px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.08);position:sticky;top:0}
-nav a{margin:0 12px;color:#0e501e;text-decoration:none;font-weight:bold}
+nav{background:#fff;padding:12px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.08);position:sticky;top:0;z-index:10}
+nav a{margin:0 10px;color:#0e501e;text-decoration:none;font-weight:bold}
 .container{max-width:1000px;margin:auto;padding:20px 16px}
-.card{background:#fff;border:2px solid #0a7a28;border-radius:14px;padding:16px;margin:14px 0}
+.card{background:#fff;border:2px solid #0a7a28;border-radius:14px;padding:16px;margin:14px 0;overflow:hidden}
 .card h3{background:#0a7a28;color:#fff;padding:10px;border-radius:8px}
 .card p{margin-top:10px;line-height:1.6}
+.card img{width:100%;height:200px;object-fit:cover;border-radius:10px;margin-top:12px}
+.price{font-weight:bold;color:#0a7a28;font-size:18px;margin-top:8px}
+.badge{display:inline-block;background:#ffcc00;color:#111;padding:4px 10px;border-radius:20px;font-size:12px;font-weight:bold;margin-top:8px}
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-@media(max-width:650px){.grid{grid-template-columns:1fr}header h1{font-size:28px}}
+@media(max-width:650px){.grid{grid-template-columns:1fr}}
 .btn{display:inline-block;background:#0a7a28;color:#fff;padding:14px 22px;border-radius:30px;text-decoration:none;font-weight:bold;margin:8px 6px}
 .btn-yellow{background:#ffcc00;color:#111}
 footer{background:#0e501e;color:#fff;text-align:center;padding:22px 16px;margin-top:20px}
@@ -28,62 +29,59 @@ footer a{color:#b7ffbd}
 </style>
 </head>
 <body>
-
 <header>
-  <div style="font-size:48px">🌿</div>
-  <h1>ATHIESIMPH</h1>
-  <p>ATHIESIMPH PTY LTD • Vibrant Plants, Healthy Soil</p>
+  <img id="siteLogo"><div style="font-size:48px" id="logoEmoji">🌿</div>
+  <h1>ATHIESIMPH</h1><p>ATHIESIMPH PTY LTD • Vibrant Plants, Healthy Soil</p>
   <div class="tagline">We don't just landscape,<br><b>WE TRANSFORM SPACES into lasting impressions.</b></div>
   <p style="margin-top:12px;font-weight:bold">DESIGN • CREATE • MAINTAIN • Fully Insured</p>
   <p>Mfuleni, Cape Town | 068 518 2321 | johnfep...@gmail.com</p>
 </header>
-<div class="topbar">✅ Fully Insured &nbsp; • &nbsp; ✅ Free Quote &nbsp; • &nbsp; ✅ Mfuleni & All Cape Town</div>
-
-<nav>
-  <a href="index.html">Home</a>
-  <a href="quote.html">Get A Free Quote</a>
-  <a href="tel:+27685182321">Call: 068 518 2321</a>
-  <a href="mailto:johnfep...@gmail.com">Email Us</a>
-</nav>
+<div class="topbar">✅ Fully Insured • ✅ Free Quote • ✅ Mfuleni & All Cape Town</div>
+<nav><a href="index.html">Home</a><a href="quote.html">Get A Free Quote</a><a href="tel:+27685182321">Call</a><a href="mailto:johnfep...@gmail.com">Email Us</a><a href="owner.html">Owner Login</a></nav>
 
 <div class="container">
-  <h2 style="color:#0e501e">OUR SERVICES</h2>
-  <div class="grid">
-    <div class="card"><h3>1. LANDSCAPE DESIGN</h3><p>Creative and functional designs tailored to your space. We plan, draw and design your dream garden before we build it.</p></div>
-    <div class="card"><h3>2. GARDEN INSTALLATION</h3><p>From plants to features — we bring your vision to life. New lawn, plants, stones, flower beds and more.</p></div>
-    <div class="card"><h3>3. LAWN CARE</h3><p>Healthy lawns, expert care, year-round beauty. Cutting, edging, feeding and weed control.</p></div>
-    <div class="card"><h3>4. IRRIGATION SYSTEMS</h3><p>Efficient watering solutions for a lush and green landscape. Save water, save money.</p></div>
-    <div class="card"><h3>5. HARDSCAPING</h3><p>Paving, decks, retaining walls and other outdoor structures. Strong, neat and long-lasting.</p></div>
-    <div class="card"><h3>6. MAINTENANCE</h3><p>Reliable maintenance to keep your outdoor space stunning. Weekly / monthly plans available.</p></div>
-  </div>
-
-  <div class="card">
-    <h3>WHY CHOOSE ATHIESIMPH?</h3>
-    <p>✔ Quality Workmanship &nbsp; ✔ Sustainable Solutions<br>
-    ✔ Professional Team &nbsp; ✔ Customer Satisfaction<br>
-    ✔ Fully Insured — your property is safe with us<br>
-    ✔ We work in Mfuleni, Delft, Khayelitsha, Mitchells Plain & all Cape Town</p>
-  </div>
-
-  <div class="card">
-    <h3>HOW IT WORKS</h3>
-    <p><b>1.</b> WhatsApp us photos of your garden — 068 518 2321<br>
-    <b>2.</b> We visit, measure & give you a FREE quote<br>
-    <b>3.</b> We Design → Create → Maintain — you relax</p>
-  </div>
-
-  <div style="text-align:center">
-    <a class="btn" href="quote.html">GET A FREE QUOTE → PAGE 2</a>
-    <a class="btn btn-yellow" href="https://wa.me/27685182321?text=Hi%20Athiesimph,%20I%20want%20a%20free%20quote%20for%20my%20garden">WhatsApp Us</a>
-  </div>
+<h2 style="color:#0e501e">OUR SERVICES — REAL WORK</h2>
+<p style="color:#666;margin:6px 0 14px" id="cloudStatus">☁️ Loading latest prices & photos from cloud...</p>
+<div class="grid">
+  <div class="card"><h3>1. LANDSCAPE DESIGN</h3><img id="img_design" src="https://images.unsplash.com/photo-1558904541-efa843a96f01?w=800&q=80"><p>Creative and functional designs tailored to your space.</p><div class="price" data-price="design">From R1,500 — Design Plan</div><span class="badge" id="badge_design">DEMO PHOTO</span></div>
+  <div class="card"><h3>2. GARDEN INSTALLATION</h3><img id="img_installation" src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=800&q=80"><p>From plants to features — we bring your vision to life.</p><div class="price" data-price="installation">From R2,500 — Full Installation</div><span class="badge" id="badge_installation">DEMO PHOTO</span></div>
+  <div class="card"><h3>3. LAWN CARE</h3><img id="img_lawn" src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800&q=80"><p>Healthy lawns, expert care, year-round beauty.</p><div class="price" data-price="lawn">From R250 per visit</div><span class="badge" id="badge_lawn">DEMO PHOTO</span></div>
+  <div class="card"><h3>4. IRRIGATION SYSTEMS</h3><img id="img_irrigation" src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=800&q=80"><p>Efficient watering solutions for a lush and green landscape.</p><div class="price" data-price="irrigation">Free Quote — Water Saving Design</div><span class="badge" id="badge_irrigation">DEMO PHOTO</span></div>
+  <div class="card"><h3>5. HARDSCAPING</h3><img id="img_hardscape" src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80"><p>Paving, decks, retaining walls and other outdoor structures.</p><div class="price" data-price="hardscape">From R350 per m² — Paving</div><span class="badge" id="badge_hardscape">DEMO PHOTO</span></div>
+  <div class="card"><h3>6. MAINTENANCE</h3><img id="img_maintenance" src="https://images.unsplash.com/photo-1598902108854-10e335adac99?w=800&q=80"><p>Reliable maintenance to keep your outdoor space stunning.</p><div class="price" data-price="maintenance">From R800 / month</div><span class="badge" id="badge_maintenance">DEMO PHOTO</span></div>
 </div>
+<div style="text-align:center"><a class="btn" href="quote.html">GET A FREE QUOTE → PAGE 2</a><a class="btn btn-yellow" href="https://wa.me/27685182321?text=Hi%20Athiesimph,%20I%20want%20a%20free%20quote%20for%20my%20garden">WhatsApp Us</a></div>
+</div>
+<footer><b>ATHIESIMPH PTY LTD</b><br>44 Tokwane Street, Mfuleni, Cape Town, 7100<br>Call / WhatsApp: 068 518 2321 • Email: <a href="mailto:johnfep...@gmail.com">johnfep...@gmail.com</a><br><small>Website built by Avatar-Web Store — 073 364 2819</small></footer>
 
-<footer>
-  <b>ATHIESIMPH PTY LTD</b><br>
-  44 Tokwane Street, Mfuleni, Cape Town, Western Cape, 7100<br>
-  Call / WhatsApp: 068 518 2321 • Email: <a href="mailto:johnfep...@gmail.com">johnfep...@gmail.com</a><br><br>
-  Transforming Outdoor Spaces With Excellence<br>
-  <small>Website built by Avatar-Web Store — 073 364 2819</small>
-</footer>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+// 🔴 PASTE YOUR FIREBASE CONFIG HERE - from Firebase Console > Project Settings > Web App
+const firebaseConfig = {
+  apiKey: "PASTE_YOUR_API_KEY",
+  authDomain: "PASTE_YOUR_PROJECT.firebaseapp.com",
+  projectId: "PASTE_YOUR_PROJECT_ID",
+  storageBucket: "PASTE_YOUR_PROJECT.appspot.com",
+  messagingSenderId: "PASTE_SENDER_ID",
+  appId: "PASTE_APP_ID"
+};
+
+try {
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+  const snap = await getDoc(doc(db, "athiesimph", "settings"));
+  if(snap.exists()){
+    const data = snap.data();
+    document.getElementById('cloudStatus').textContent = '✅ Showing latest cloud prices & photos';
+    if(data.logo){ document.getElementById('siteLogo').src=data.logo; document.getElementById('siteLogo').style.display='block'; document.getElementById('logoEmoji').style.display='none'; }
+    if(data.prices){ document.querySelectorAll('[data-price]').forEach(el=>{ const k=el.getAttribute('data-price'); if(data.prices[k]) el.textContent=data.prices[k]; }); }
+    if(data.photos){ ['design','installation','lawn','irrigation','hardscape','maintenance'].forEach(k=>{ if(data.photos[k]){ document.getElementById('img_'+k).src=data.photos[k]; const b=document.getElementById('badge_'+k); b.textContent='REAL WORK • ATHIESIMPH'; b.style.background='#0a7a28'; b.style.color='#fff'; } }); }
+  } else {
+    document.getElementById('cloudStatus').textContent = 'ℹ️ Cloud not set up yet — showing demo. Owner: login to save first version.';
+  }
+} catch(e){ document.getElementById('cloudStatus').textContent = '⚠️ Could not load cloud — showing demo prices. Check Firebase config.'; console.log(e); }
+</script>
 </body>
 </html>
