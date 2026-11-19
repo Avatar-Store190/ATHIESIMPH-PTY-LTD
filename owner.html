@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Owner Dashboard | ATHIESIMPH</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
+body{background:#eef5ee} header{background:#0e501e;color:#fff;padding:22px;text-align:center}
+.container{max-width:700px;margin:auto;padding:20px 16px}
+.card{background:#fff;border-radius:14px;padding:20px;margin:14px 0;box-shadow:0 2px 10px rgba(0,0,0,.08)}
+label{font-weight:bold;display:block;margin-top:14px} input{width:100%;padding:12px;margin-top:6px;border:2px solid #ccc;border-radius:10px;font-size:16px}
+button{width:100%;background:#0a7a28;color:#fff;padding:14px;border:none;border-radius:30px;font-size:17px;font-weight:bold;cursor:pointer;margin-top:16px}
+button.red{background:#c00} button.grey{background:#666} .hidden{display:none}
+img.preview{width:100%;height:160px;object-fit:cover;border-radius:10px;margin-top:10px;border:2px solid #0a7a28}
+img.logoPrev{width:120px;height:120px;object-fit:cover;border-radius:50%;border:3px solid #0a7a28;margin-top:10px}
+.photo-row{border:1px solid #ddd;border-radius:12px;padding:12px;margin-top:12px}
+</style>
+</head>
+<body>
+<header><h1>🌿 ATHIESIMPH — OWNER DASHBOARD ☁️ CLOUD</h1><p>Changes here show for ALL customers, on ALL phones</p></header>
+<div class="container">
+<div class="card" id="loginBox">
+<h2>Owner Login</h2><p style="color:#666;margin-top:8px">First time password: <b>Athiesimph123</b><br>This password is saved in Firebase cloud, not just this phone.</p>
+<label>Password</label><input type="password" id="passInput" placeholder="Enter owner password"><button onclick="login()">LOGIN</button><p id="loginError" style="color:red;margin-top:10px"></p>
+<p id="firebaseStatus" style="color:#666;margin-top:10px">Connecting to cloud...</p>
+</div>
+
+<div class="card hidden" id="dashBox">
+<h2>Welcome, Owner 👋 ☁️ Cloud Connected</h2>
+<label>1. Company Logo</label><input type="file" id="logoInput" accept="image/*"><img id="logoPreview" class="logoPrev hidden"><button onclick="saveLogo()">SAVE LOGO TO CLOUD</button>
+<label>2. Change Prices</label>
+<label>Landscape Design</label><input id="p_design"><label>Garden Installation</label><input id="p_installation"><label>Lawn Care</label><input id="p_lawn"><label>Irrigation</label><input id="p_irrigation"><label>Hardscaping</label><input id="p_hardscape"><label>Maintenance</label><input id="p_maintenance">
+<button onclick="savePrices()">SAVE ALL PRICES TO CLOUD</button>
+<label>3. Upload REAL Photos</label><p style="color:#666;font-weight:normal">Photos are compressed to fit cloud (max 800px). Good for phone photos.</p>
+<div id="photoList"></div><button onclick="saveAllPhotos()">SAVE ALL PHOTOS TO CLOUD</button>
+<button class="grey" onclick="resetPhotos()">RESET ALL PHOTOS TO DEMO (Cloud)</button>
+<label>4. Change Password (Cloud)</label><input type="password" id="newPass" placeholder="New password 6+ characters"><button onclick="changePass()">CHANGE PASSWORD IN CLOUD</button>
+<button class="red" onclick="logout()">LOGOUT</button>
+<p style="text-align:center;margin-top:14px"><a href="index.html">← Back To Website — See Cloud Changes</a></p>
+<p id="msg" style="color:green;font-weight:bold;text-align:center;margin-top:10px"></p>
+</div>
+</div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+// 🔴 PASTE SAME FIREBASE CONFIG HERE AS IN index.html
+const firebaseConfig = {
+  apiKey: "PASTE_YOUR_API_KEY",
+  authDomain: "PASTE_YOUR_PROJECT.firebaseapp.com",
+  projectId: "PASTE_YOUR_PROJECT_ID",
+  storageBucket: "PASTE_YOUR_PROJECT.appspot.com",
+  messagingSenderId: "PASTE_SENDER_ID",
+  appId: "PASTE_APP_ID"
+};
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const ref = doc(db, "athiesimph", "settings");
+
+let cloudData = {prices:{}, photos:{}, logo:'', password:'Athiesimph123'};
+let logoData = ''; let photoData = {};
+const SERVICES = [{key:'design',label:'1. Landscape Design'},{key:'installation',label:'2. Garden Installation'},{key:'lawn',label:'3. Lawn Care'},{key:'irrigation',label:'4. Irrigation'},{key:'hardscape',label:'5. Hardscaping'},{key:'maintenance',label:'6. Maintenance'}];
+
+// Load cloud on start
+try{
+  const snap = await getDoc(ref);
+  if(snap.exists()){ cloudData = {...cloudData, ...snap.data()}; if(!cloudData.password) cloudData.password='Athiesimph123'; }
+  else { await setDoc(ref, cloudData); }
+  document.getElementById('firebaseStatus').textContent = '✅ Cloud connected';
+}catch(e){ document.getElementById('firebaseStatus').textContent = '❌ Cloud not connected — check Firebase config. Error: '+e.message; }
+
+window.login = function(){
+  if(document.getElementById('passInput').value === cloudData.password){
+    document.getElementById('loginBox').classList.add('hidden');
+    document.getElementById('dashBox').classList.remove('hidden');
+    buildPhotoInputs(); loadSaved();
+  } else document.getElementById('loginError').textContent='Wrong password.';
+}
+function buildPhotoInputs(){
+  const wrap=document.getElementById('photoList'); wrap.innerHTML='';
+  SERVICES.forEach(s=>{
+    const div=document.createElement('div'); div.className='photo-row';
+    div.innerHTML=`<b>${s.label}</b><br><input type="file" accept="image/*" data-key="${s.key}"><img id="prev_${s.key}" class="preview hidden">`;
+    wrap.appendChild(div);
+  });
+  wrap.querySelectorAll('input[type=file]').forEach(inp=>{
+    inp.addEventListener('change', e=>{
+      const key=e.target.getAttribute('data-key'); const file=e.target.files[0]; if(!file) return;
+      compressImage(file, (compressed)=>{
+        photoData[key]=compressed;
+        const img=document.getElementById('prev_'+key); img.src=compressed; img.classList.remove('hidden');
+      });
+    });
+  });
+}
+function compressImage(file, cb){
+  const reader=new FileReader();
+  reader.onload=e=>{
+    const img=new Image(); img.onload=()=>{
+      const canvas=document.createElement('canvas'); const max=800; let w=img.width, h=img.height;
+      if(w>max){ h=h*max/w; w=max; }
+      canvas.width=w; canvas.height=h; canvas.getContext('2d').drawImage(img,0,0,w,h);
+      cb(canvas.toDataURL('image/jpeg',0.75));
+    }; img.src=e.target.result;
+  }; reader.readAsDataURL(file);
+}
+function loadSaved(){
+  const p=cloudData.prices||{};
+  document.getElementById('p_design').value=p.design||'From R1,500 — Design Plan';
+  document.getElementById('p_installation').value=p.installation||'From R2,500 — Full Installation';
+  document.getElementById('p_lawn').value=p.lawn||'From R250 per visit';
+  document.getElementById('p_irrigation').value=p.irrigation||'Free Quote — Water Saving Design';
+  document.getElementById('p_hardscape').value=p.hardscape||'From R350 per m² — Paving';
+  document.getElementById('p_maintenance').value=p.maintenance||'From R800 / month';
+  if(cloudData.logo){ document.getElementById('logoPreview').src=cloudData.logo; document.getElementById('logoPreview').classList.remove('hidden'); }
+  SERVICES.forEach(s=>{ if(cloudData.photos && cloudData.photos[s.key]){ const img=document.getElementById('prev_'+s.key); if(img){ img.src=cloudData.photos[s.key]; img.classList.remove('hidden'); } } });
+}
+document.getElementById('logoInput').addEventListener('change', e=>{
+  const file=e.target.files[0]; if(!file) return;
+  compressImage(file, (c)=>{ logoData=c; document.getElementById('logoPreview').src=c; document.getElementById('logoPreview').classList.remove('hidden'); });
+});
+async function saveCloud(){
+  await setDoc(ref, cloudData);
+  document.getElementById('msg').textContent='✅ Saved to Cloud! All customers will see it now.';
+}
+window.saveLogo=async function(){
+  if(!logoData){ document.getElementById('msg').textContent='Choose a logo first.'; return; }
+  cloudData.logo=logoData; await saveCloud();
+}
+window.savePrices=async function(){
+  cloudData.prices={design:document.getElementById('p_design').value, installation:document.getElementById('p_installation').value, lawn:document.getElementById('p_lawn').value, irrigation:document.getElementById('p_irrigation').value, hardscape:document.getElementById('p_hardscape').value, maintenance:document.getElementById('p_maintenance').value};
+  await saveCloud();
+}
+window.saveAllPhotos=async function(){
+  if(Object.keys(photoData).length===0){ document.getElementById('msg').textContent='Choose at least 1 photo.'; return; }
+  cloudData.photos={...(cloudData.photos||{}), ...photoData};
+  await saveCloud();
+}
+window.resetPhotos=async function(){
+  cloudData.photos={}; photoData={}; await saveCloud(); document.getElementById('msg').textContent='✅ Photos reset to demo for everyone.';
+}
+window.changePass=async function(){
+  const np=document.getElementById('newPass').value; if(np.length<6){ alert('6+ characters'); return; }
+  cloudData.password=np; await saveCloud(); document.getElementById('msg').textContent='✅ Password changed in cloud: '+np;
+}
+window.logout=function(){ location.reload(); }
+</script>
+</body>
+</html>
