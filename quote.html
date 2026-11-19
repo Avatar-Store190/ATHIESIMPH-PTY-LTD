@@ -1,115 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Get A Free Quote | ATHIESIMPH PTY LTD</title>
-<style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}
-body{background:#f6faf6;color:#222}
-header{background:#0e501e;color:#fff;padding:26px 18px;text-align:center}
-header h1{font-size:32px}
-header p{color:#b7ffbd;margin-top:6px}
-nav{background:#fff;padding:12px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.08)}
-nav a{margin:0 12px;color:#0e501e;text-decoration:none;font-weight:bold}
-.container{max-width:800px;margin:auto;padding:20px 16px}
-.card{background:#fff;border:2px solid #0a7a28;border-radius:14px;padding:18px;margin:14px 0}
-label{font-weight:bold;display:block;margin-top:14px}
-input,select,textarea{width:100%;padding:13px;margin-top:6px;border:2px solid #ccc;border-radius:10px;font-size:16px}
-.btn{width:100%;background:#0a7a28;color:#fff;padding:16px;border:none;border-radius:30px;font-size:19px;font-weight:bold;cursor:pointer;margin-top:18px}
-.note{font-size:14px;color:#666;margin-top:10px;text-align:center}
-footer{background:#0e501e;color:#fff;text-align:center;padding:22px 16px}
-footer a{color:#b7ffbd}
-</style>
-</head>
-<body>
-
-<header>
-  <h1>🌿 ATHIESIMPH PTY LTD</h1>
-  <p>PAGE 2 • GET A FREE QUOTE • CONTACT US</p>
-  <p>Tell us what you need — we reply within 24 hours.</p>
-  <p>WhatsApp: 068 518 2321 • Email: johnfep...@gmail.com</p>
-</header>
-
-<nav>
-  <a href="index.html">← Back To Home</a>
-  <a href="tel:+27685182321">Call: 068 518 2321</a>
-  <a href="mailto:johnfep...@gmail.com">Email Us</a>
-</nav>
-
-<div class="container">
-  <div class="card">
-    <h2 style="color:#0e501e">REQUEST A FREE QUOTE — FORM LINKED TO EMAIL</h2>
-    <p style="margin-top:8px">Fill this in — when you press SEND, it will open your email app to: <b>johnfep...@gmail.com</b> with your details pre-filled. Just press Send in your email.</p>
-
-    <!-- THIS FORM SENDS TO EMAIL -->
-    <form action="mailto:johnfep...@gmail.com" method="post" enctype="text/plain">
-      <label>Your Name *</label>
-      <input type="text" name="Name" placeholder="e.g. Thabo M." required>
-
-      <label>Your Phone / WhatsApp *</label>
-      <input type="tel" name="Phone" placeholder="e.g. 071 123 4567" required>
-
-      <label>Your Area *</label>
-      <input type="text" name="Area" placeholder="e.g. Mfuleni, Delft, Khayelitsha" required>
-
-      <label>What do you need?</label>
-      <select name="Service">
-        <option>Landscape Design</option>
-        <option>Garden Installation</option>
-        <option>Lawn Care</option>
-        <option>Irrigation System</option>
-        <option>Hardscaping / Paving / Decks</option>
-        <option>Maintenance (Monthly)</option>
-        <option>Garden Clean-Up</option>
-        <option>Other</option>
-      </select>
-
-      <label>Size of garden / Tell us more:</label>
-      <textarea name="Details" rows="4" placeholder="e.g. My garden is big, lawn is dead, I need paving and new plants..."></textarea>
-
-      <label>When do you want us to start?</label>
-      <select name="Start_Date">
-        <option>As soon as possible</option>
-        <option>This week</option>
-        <option>Next week</option>
-        <option>Next month</option>
-        <option>Just getting a price</option>
-      </select>
-
-      <button class="btn" type="submit">SEND QUOTE → EMAIL US</button>
-      <p class="note">Or email us directly: <a href="mailto:johnfep...@gmail.com">johnfep...@gmail.com</a></p>
-    </form>
-  </div>
-
-  <div class="card">
-    <h2 style="color:#0e501e">PRICE GUIDE</h2>
-    <p style="margin-top:10px;line-height:1.9">
-    • Lawn Care / Cutting: From R250 per visit (depends on size)<br>
-    • Garden Clean-Up: From R500 — once-off, includes removal<br>
-    • New Garden Installation: FREE quote after site visit<br>
-    • Irrigation System: FREE quote — we design for water saving<br>
-    • Paving / Hardscaping: FREE quote — per m², after measuring<br>
-    • Monthly Maintenance: From R800 / month — lawn + garden + clean
-    </p>
-  </div>
-
-  <div class="card">
-    <h2 style="color:#0e501e">CONTACT & LOCATION</h2>
-    <p style="margin-top:10px;line-height:1.9">
-    📍 44 Tokwane Street, Mfuleni, Cape Town, Western Cape, 7100<br>
-    📞 Call / WhatsApp: 068 518 2321<br>
-    📧 Email: <a href="mailto:johnfep...@gmail.com">johnfep...@gmail.com</a><br>
-    🕒 Mon - Sat: 07:30 - 17:30 • Sun: Closed • Emergency: WhatsApp<br>
-    ✅ Fully Insured • Quality Workmanship • Sustainable Solutions
-    </p>
-  </div>
-</div>
-
-<footer>
-  <b>ATHIESIMPH — Transforming Outdoor Spaces With Excellence</b><br>
-  Page 1: Home & Services • Page 2: Quote & Contact<br>
-  <small>Website built by Avatar-Web Store — 073 364 2819</small>
-</footer>
-</body>
-</html>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+const firebaseConfig = { apiKey:"PASTE_YOUR_API_KEY", authDomain:"PASTE_YOUR_PROJECT.firebaseapp.com", projectId:"PASTE_YOUR_PROJECT_ID", storageBucket:"PASTE_YOUR_PROJECT.appspot.com", messagingSenderId:"PASTE_SENDER_ID", appId:"PASTE_APP_ID" };
+try{
+  const app=initializeApp(firebaseConfig); const db=getFirestore(app);
+  const snap=await getDoc(doc(db,"athiesimph","settings"));
+  if(snap.exists() && snap.data().prices){
+    const p=snap.data().prices;
+    const el=document.getElementById('priceList');
+    if(el) el.innerHTML = Object.values(p).map(v=>'- '+v).join('<br>');
+  }
+}catch(e){ console.log(e); }
+</script>
