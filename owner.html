@@ -24,7 +24,6 @@ img.logoPrev{width:120px;height:120px;object-fit:cover;border-radius:50%;border:
 <label>Password</label><input type="password" id="passInput" placeholder="Enter owner password"><button onclick="login()">LOGIN</button><p id="loginError" style="color:red;margin-top:10px"></p>
 <p id="firebaseStatus" style="color:#666;margin-top:10px">Connecting to cloud...</p>
 </div>
-
 <div class="card hidden" id="dashBox">
 <h2>Welcome, Owner 👋 ☁️ Cloud Connected</h2>
 <label>1. Company Logo</label><input type="file" id="logoInput" accept="image/*"><img id="logoPreview" class="logoPrev hidden"><button onclick="saveLogo()">SAVE LOGO TO CLOUD</button>
@@ -40,36 +39,29 @@ img.logoPrev{width:120px;height:120px;object-fit:cover;border-radius:50%;border:
 <p id="msg" style="color:green;font-weight:bold;text-align:center;margin-top:10px"></p>
 </div>
 </div>
-
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-
-// 🔴 PASTE SAME FIREBASE CONFIG HERE AS IN index.html
 const firebaseConfig = {
-  apiKey: "PASTE_YOUR_API_KEY",
-  authDomain: "PASTE_YOUR_PROJECT.firebaseapp.com",
-  projectId: "PASTE_YOUR_PROJECT_ID",
-  storageBucket: "PASTE_YOUR_PROJECT.appspot.com",
-  messagingSenderId: "PASTE_SENDER_ID",
-  appId: "PASTE_APP_ID"
+  apiKey: "AIzaSyBNclppWsgFBgSy8mYC1f7R3EAsBbKcDAM",
+  authDomain: "athiesimph-a556a.firebaseapp.com",
+  projectId: "athiesimph-a556a",
+  storageBucket: "athiesimph-a556a.firebasestorage.app",
+  messagingSenderId: "281015773320",
+  appId: "1:281015773320:web:8aced283d754fc6e07173d"
 };
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const ref = doc(db, "athiesimph", "settings");
-
 let cloudData = {prices:{}, photos:{}, logo:'', password:'Athiesimph123'};
 let logoData = ''; let photoData = {};
 const SERVICES = [{key:'design',label:'1. Landscape Design'},{key:'installation',label:'2. Garden Installation'},{key:'lawn',label:'3. Lawn Care'},{key:'irrigation',label:'4. Irrigation'},{key:'hardscape',label:'5. Hardscaping'},{key:'maintenance',label:'6. Maintenance'}];
-
-// Load cloud on start
 try{
   const snap = await getDoc(ref);
   if(snap.exists()){ cloudData = {...cloudData, ...snap.data()}; if(!cloudData.password) cloudData.password='Athiesimph123'; }
   else { await setDoc(ref, cloudData); }
   document.getElementById('firebaseStatus').textContent = '✅ Cloud connected';
 }catch(e){ document.getElementById('firebaseStatus').textContent = '❌ Cloud not connected — check Firebase config. Error: '+e.message; }
-
 window.login = function(){
   if(document.getElementById('passInput').value === cloudData.password){
     document.getElementById('loginBox').classList.add('hidden');
